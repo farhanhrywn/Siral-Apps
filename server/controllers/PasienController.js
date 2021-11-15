@@ -128,6 +128,23 @@ class Controller {
       }
     }
 
+    static async getPasienByBirthDate(req, res, next) {
+      try {
+        let { tanggal_lahir } = req.query
+        let detailPasien = await DataPasien.findOne({
+          where: {
+            tanggal_lahir
+          }
+        })
+        if(detailPasien) {
+          res.status(200).json(detailPasien)
+        }
+        throw { name: 'Not Found' }
+      } catch (error) {
+        next(error)
+      }
+    }
+
     static async saveFormPasien(req, res, next) {
         try {
             const createForm = await DataPasien.create(req.body)
