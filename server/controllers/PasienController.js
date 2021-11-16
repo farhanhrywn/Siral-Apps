@@ -134,6 +134,9 @@ class Controller {
         let detailPasien = await DataPasien.findOne({
           where: {
             tanggal_lahir
+          },
+          attributes: {
+            exclude: ['id']
           }
         })
         if(detailPasien) {
